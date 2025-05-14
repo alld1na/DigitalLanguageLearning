@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web 2.0 арқылы шет тілін оқыту</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --dark: #2b2d42;
+      --light: #f8f9fa;
+      --gray: #e9ecef;
+      --text: #495057;
+      --success: #4cc9f0;
+      --warning: #f72585;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+    
+    /* Навигация */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+    
+    /* Шапка */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: cover;
+      opacity: 0.3;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    
+    /* Основной контент */
+    .content {
+      padding: 4rem 0;
+    }
+    
+    .intro-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+    
+    .intro-text {
+      flex: 1 1 55%;
+    }
+    
+    .intro-image {
+      flex: 1 1 40%;
+      text-align: center;
+    }
+    
+    .intro-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .intro-image img:hover {
+      transform: scale(1.02);
+    }
+    
+    h2 {
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+    
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    /* Таблица */
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+      margin: 3rem 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray);
+    }
+    
+    th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba(248, 249, 250, 0.5);
+    }
+    
+    tr:hover {
+      background-color: rgba(67, 97, 238, 0.05);
+    }
+    
+    /* Форма */
+    .form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-group {
+      margin-bottom: 1.75rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--gray);
+      border-radius: 0.5rem;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+      outline: none;
+    }
+    
+    textarea.form-control {
+      min-height: 180px;
+      resize: vertical;
+    }
+    
+    /* Футер */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .nav-links {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .header p {
+        font-size: 1.1rem;
+      }
+      
+      .intro-section {
+        flex-direction: column;
+      }
+      
+      .intro-text, .intro-image {
+        flex: 1 1 100%;
+      }
+      
+      .form-container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-globe-americas"></i>
+        <span>Web 2.0 & Тіл үйрену</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Басты бет</a></li>
+        <li><a href="tools.html">Құралдар</a></li>
+        <li><a href="examples.html">Мысалдар</a></li>
+        <li><a href="#contact">Байланыс</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="header">
+    <div class="header-content fade-in">
+      <h1>Web 2.0 технологиялары арқылы шет тілін оқыту</h1>
+      <p>Заманауи интернет құралдары арқылы тиімді тіл үйрену жолдары</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="content fade-in">
+      <div class="intro-section">
+        <div class="intro-text">
+          <h2>Web 2.0 дегеніміз не?</h2>
+          <p>Web 2.0 — қолданушылар мазмұн жасай алатын, бір-бірімен байланыса алатын, интерактивті веб-технологиялар жиынтығы.</p>
+
+          <h2 class="delay-1">Сайттың мақсаты</h2>
+          <p class="delay-1">Сайт шет тілін оқытуда Web 2.0 технологияларын тиімді қолдану әдістерін, құралдарын және мысалдарын ұсынуға арналған.</p>
+        </div>
+
+        <div class="intro-image delay-2">
+          <img src="zhan.jpg" alt="Сыныптағы оқушылармен">
+        </div>
+      </div>
+    </section>
+
+    <section class="content fade-in delay-1">
+      <h2>Web 1.0 мен Web 2.0 салыстыру</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>WEB 1.0</th>
+              <th>WEB 2.0</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Тек оқу</td><td>Оқыту және өзара әрекет</td></tr>
+            <tr><td>Автор - сайт иесі</td><td>Автор - кез келген қолданушы</td></tr>
+            <tr><td>Тұрақты мазмұн</td><td>Жаңартылып тұратын мазмұн</td></tr>
+            <tr><td>Статикалық беттер</td><td>Динамикалық қосымшалар</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content fade-in delay-2" id="contact">
+      <h2>Байланыс</h2>
+      <div class="form-container">
+        <form>
+          <div class="form-group">
+            <label for="name">Атыңыз</label>
+            <input type="text" id="name" class="form-control" placeholder="Атыңыз" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Электрондық пошта</label>
+            <input type="email" id="email" class="form-control" placeholder="Электрондық пошта" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Хабарлама</label>
+            <textarea id="message" class="form-control" placeholder="Хабарлама..." rows="5" required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Жіберу</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in delay-3">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="index.html">Басты бет</a>
+        <a href="tools.html">Құралдар</a>
+        <a href="examples.html">Мысалдар</a>
+        <a href="#contact">Байланыс</a>
+      </div>
+      
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      
+      <p class="copyright">© 2023 Web 2.0 & Тіл үйрену. Барлық құқықтар қорғалған.</p>
+    </div>
+  </footer>
+</body>
+</html>

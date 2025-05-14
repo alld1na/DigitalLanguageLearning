@@ -1,0 +1,107 @@
+/* styles.css */
+:root {
+    --primary: #4361ee;
+    --primary-light: #4895ef;
+    --secondary: #3f37c9;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+    --accent: #f72585;
+    --success: #4cc9f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    background-color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Жаңа навигация стильдері */
+.navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+    color: var(--accent);
+}
+
+/* Карточкалар үшін жаңа стильдер */
+.tool-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    margin-bottom: 2rem;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+}
+
+.tool-header {
+    border-bottom: 2px solid var(--light);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Мысалдар бөлімі */
+.example-card {
+    background: var(--light);
+    border-radius: 0.8rem;
+    padding: 1.5rem;
+    transition: box-shadow 0.3s;
+}
+
+.example-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Адаптивтік */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .tool-card {
+        padding: 1rem;
+    }
+}

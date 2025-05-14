@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Қолдану мысалдары</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --dark: #2b2d42;
+      --light: #f8f9fa;
+      --gray: #e9ecef;
+      --text: #495057;
+      --success: #4cc9f0;
+      --warning: #f72585;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+    
+    /* Навигация */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 1.2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+    
+    /* Шапка */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+    
+    .header:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: cover;
+      opacity: 0.3;
+    }
+    
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Карточки примеров */
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .example-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      border-left: 5px solid var(--accent);
+      position: relative;
+    }
+    
+    .example-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .example-card h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      padding: 1.5rem 1.5rem 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .example-card h2 i {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+    
+    .example-card ul {
+      padding: 0 1.5rem 1.5rem;
+      list-style: none;
+    }
+    
+    .example-card li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    
+    .example-card li:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 0.5rem;
+      height: 0.5rem;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    
+    .example-card li strong {
+      color: var(--dark);
+    }
+    
+    .tool-icon {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: rgba(72, 149, 239, 0.1);
+      z-index: 0;
+    }
+    
+    /* Футер */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .nav-links {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .header p {
+        font-size: 1.1rem;
+      }
+      
+      .example-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-language"></i>
+        <span>Web 2.0 & Тіл үйрену</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Басты бет</a></li>
+        <li><a href="tools.html">Құралдар</a></li>
+        <li><a href="examples.html" class="active">Мысалдар</a></li>
+        <li><a href="#contact">Байланыс</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="header fade-in">
+    <h1>Қолдану мысалдары</h1>
+    <p>Web 2.0 құралдарын қолдана отырып тілді шығармашылықпен үйреніңіз</p>
+  </header>
+
+  <main class="container">
+    <section class="example-grid">
+      <div class="example-card fade-in delay-1">
+        <i class="fas fa-thumbtack tool-icon"></i>
+        <h2><i class="fab fa-padlet"></i> Padlet – Виртуалды тақта</h2>
+        <ul>
+          <li><strong>“My Favorite Book”:</strong> Әр оқушы Padlet тақтасына сүйікті кітабы туралы қысқаша пікір жазады.</li>
+          <li><strong>“Vocabulary Wall”:</strong> Жаңа сөздерді суретімен және сөйлем ішінде қолданып жазу.</li>
+          <li><strong>“Group Brainstorming”:</strong> Сабақ тақырыбына байланысты идеялар жазу.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-2">
+        <i class="fas fa-video tool-icon"></i>
+        <h2><i class="fab fa-youtube"></i> YouTube – Видеоплатформа</h2>
+        <ul>
+          <li><strong>“Video Instructions”:</strong> Видео түсіріп, YouTube-қа жүктеу.</li>
+          <li><strong>“React to a video”:</strong> Видеоны көріп, пікір жазу.</li>
+          <li><strong>“Video Vocabulary”:</strong> Видео негізінде сөздік жасау.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-3">
+        <i class="fas fa-camera-retro tool-icon"></i>
+        <h2><i class="fab fa-instagram"></i> Instagram – Фото/видео тапсырмалар</h2>
+        <ul>
+          <li><strong>“Photo Essay”:</strong> 3-5 суреттен тұратын галерея құру.</li>
+          <li><strong>“Stories Quiz”:</strong> Стористе сұрақтар мен сауалдар өткізу.</li>
+          <li><strong>“Grammar Challenge”:</strong> Пікірге грамматикалық сөйлем жазу.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-1">
+        <i class="fas fa-poll tool-icon"></i>
+        <h2><i class="fas fa-chart-bar"></i> Mentimeter – Интерактив</h2>
+        <ul>
+          <li><strong>“Opinion Poll”:</strong> Қарапайым сұрақтар арқылы рефлексия.</li>
+          <li><strong>“Word Cloud”:</strong> Бір сөзбен сабақ қорытындысы.</li>
+          <li><strong>“Quiz Time”:</strong> Тест немесе сауалнама жасау.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-2">
+        <i class="fas fa-gamepad tool-icon"></i>
+        <h2><i class="fas fa-dice"></i> Flippity – Интерактивті тапсырмалар</h2>
+        <ul>
+          <li><strong>“Flashcards for Revision”:</strong> Жаңа сөздерге карточкалар.</li>
+          <li><strong>“Matching Game”:</strong> Сәйкестендіру ойыны.</li>
+          <li><strong>“Randomizer”:</strong> Кездейсоқ тақырыппен сөйлеу.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-3">
+        <i class="fas fa-book tool-icon"></i>
+        <h2><i class="fab fa-wikipedia-w"></i> Wikipedia – Ақпаратпен жұмыс</h2>
+        <ul>
+          <li><strong>“Find and Summarize”:</strong> Мақаланы 5 сөйлеммен қысқарту.</li>
+          <li><strong>“Fact-checking”:</strong> Ақпараттың шынайылығын тексеру.</li>
+          <li><strong>“Glossary Building”:</strong> 10 терминге анықтама жазу.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-1">
+        <i class="fas fa-comment-dots tool-icon"></i>
+        <h2><i class="fab fa-twitter"></i> Twitter – Қысқа жазбалар</h2>
+        <ul>
+          <li><strong>“Tweet your opinion”:</strong> 280 таңба ішінде өз ойыңды білдіру.</li>
+          <li><strong>“Hashtag Story”:</strong> Хэштег арқылы шағын оқиға жазу.</li>
+          <li><strong>“Grammar Tweets”:</strong> Грамматикалық құрылыммен твит жазу.</li>
+        </ul>
+      </div>
+
+      <div class="example-card fade-in delay-2">
+        <i class="fas fa-bookmark tool-icon"></i>
+        <h2><i class="fas fa-highlighter"></i> Diigo – Ақпаратты ұйымдастыру</h2>
+        <ul>
+          <li><strong>“Bookmark Articles”:</strong> Мақалалар сақтап, пікір жазу.</li>
+          <li><strong>“Group Library”:</strong> Топпен ортақ материалдар жинау.</li>
+          <li><strong>“Highlight & Comment”:</strong> Негізгі сөйлемдерге түсініктеме жазу.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in delay-3">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="index.html">Басты бет</a>
+        <a href="tools.html">Құралдар</a>
+        <a href="examples.html">Мысалдар</a>
+        <a href="#contact">Байланыс</a>
+      </div>
+      
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      
+      <p class="copyright">© 2023 Web 2.0 & Тіл үйрену. Барлық құқықтар қорғалған.</p>
+    </div>
+  </footer>
+</body>
+</html>

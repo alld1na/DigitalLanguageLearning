@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web 2.0 Құралдар | Шет тілін оқыту</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --accent: #4895ef;
+      --dark: #2b2d42;
+      --light: #f8f9fa;
+      --gray: #e9ecef;
+      --text: #495057;
+      --success: #4cc9f0;
+      --warning: #f72585;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+    
+    /* Навигация */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .logo i {
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active {
+      color: var(--primary);
+    }
+    
+    .nav-links a.active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+    
+    /* Шапка */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      border-radius: 0 0 2rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+    
+    .header:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.1)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      background-size: cover;
+      opacity: 0.3;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .header p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 0;
+    }
+    
+    /* Основной контент */
+    .content {
+      padding: 2rem 0;
+    }
+    
+    .tool-section {
+      margin-bottom: 3rem;
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .tool-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tool-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .tool-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .tool-title {
+      font-size: 2rem;
+      color: var(--dark);
+      margin: 0;
+      font-weight: 700;
+    }
+    
+    .tool-subtitle {
+      font-size: 1.1rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-top: 0.5rem;
+    }
+    
+    .divider {
+      height: 1px;
+      background: var(--gray);
+      margin: 2rem 0;
+      border: none;
+    }
+    
+    .tool-content p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .tool-content p strong {
+      color: var(--dark);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .feature-card {
+      background: var(--gray);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+    
+    .feature-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Футер */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+    .delay-5 { animation-delay: 1s; }
+    
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .nav-links {
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .header p {
+        font-size: 1.1rem;
+      }
+      
+      .tool-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .tool-logo {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-globe-americas"></i>
+        <span>Web 2.0 & Тіл үйрену</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Басты бет</a></li>
+        <li><a href="tools.html" class="active">Құралдар</a></li>
+        <li><a href="examples.html">Мысалдар</a></li>
+        <li><a href="#contact">Байланыс</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="header fade-in">
+    <div class="header-content">
+      <h1>Web 2.0 Құралдары</h1>
+      <p>Шет тілін оқытуда қолданылатын құралдар мен платформалар</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="content">
+      <!-- Padlet -->
+      <div class="tool-section fade-in delay-1">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Padlet_logo.svg" alt="Padlet Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Padlet – Виртуалды тақта</h2>
+            <p class="tool-subtitle">Ынтымақтастыққа негізделген виртуалды тақта</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Padlet – виртуалды тақта, онда қолданушылар мәтін, сурет, видео, сілтеме, құжаттар орналастыра алады.</p>
+          <p><strong>Қолдану жолы:</strong> Padlet.com сайтына тіркеліп, жаңа тақта жасау. Тақырып қойып, мазмұн қосу (оқушылармен бөлісуге арналған сілтеме шығарады).</p>
+          <p><strong>Артықшылықтары:</strong> Ынтымақтастыққа негізделген орта, көрнекілік және интерактивтілік, жеке де, топтық жұмысқа да қолайлы.</p>
+          <p><strong>Оқытуда қолдану:</strong> Оқушыларға жазбаша пікір жаздыру, эссе бөлісу, жобаларды қорғау тақтасы ретінде қолдануға болады.</p>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="tool-section fade-in delay-2">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/YouTube_logo_2015.png" alt="YouTube Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">YouTube – Видеоплатформа</h2>
+            <p class="tool-subtitle">Әлемдегі ең танымал видео хостинг платформасы</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> YouTube – әлемдегі ең танымал видео хостинг платформасы.</p>
+          <p><strong>Қолдану жолы:</strong> Мұғалімдер дайын видеосабақтар жүктей алады, YouTube-тен дайын тілдік материалдарды таңдап көрсету.</p>
+          <p><strong>Артықшылықтары:</strong> Визуалды, есту арқылы оқыту, тегін және қолжетімді, тақырып бойынша кең ауқымды материалдар бар.</p>
+          <p><strong>Оқытуда қолдану:</strong> Сөйлеу, тыңдалым дағдыларын дамыту, пікір жазу, бейнесабақ талдау.</p>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <div class="tool-section fade-in delay-3">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Instagram_logo_2022.svg" alt="Instagram Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Instagram – Фото/видео тапсырмалар</h2>
+            <p class="tool-subtitle">Фото мен қысқа видеолар платформасы</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Instagram – фото мен қысқа видеолар жүктеуге арналған әлеуметтік желі.</p>
+          <p><strong>Қолдану жолы:</strong> Сыныпқа немесе пәнге арнап жеке парақша ашу, сөздік, грамматикалық құрылымдарды суретпен бөлісу.</p>
+          <p><strong>Артықшылықтары:</strong> Көп оқушылар күнделікті қолданатын таныс орта, визуалды оқыту, қысқа әрі нақты контент жасауға үйретеді.</p>
+          <p><strong>Оқытуда қолдану:</strong> Күнделікті жаңа сөздер, идиомалар бөлісу, шағын шығармалар, видеосабақ бөлісу.</p>
+        </div>
+      </div>
+
+      <!-- Mentimeter -->
+      <div class="tool-section fade-in delay-1">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Mentimeter_logo.svg" alt="Mentimeter Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Mentimeter – Интерактивті сауалнамалар</h2>
+            <p class="tool-subtitle">Интерактивті презентациялар мен викториналар құралы</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Mentimeter – интерактивті презентациялар, сауалнамалар және викториналар жасау платформасы.</p>
+          <p><strong>Қолдану жолы:</strong> Сұрақтар немесе викторина жасау, оқушыларға код жіберу, олар өз телефоны арқылы жауап береді.</p>
+          <p><strong>Артықшылықтары:</strong> Интерактивті, тез кері байланыс, анонимді жауап беруге мүмкіндік, талдау мен статистика алуға болады.</p>
+          <p><strong>Оқытуда қолдану:</strong> Сабақтың басында не соңында рефлексия жасау, лексика/грамматика бойынша тест алу.</p>
+        </div>
+      </div>
+
+      <!-- Flippity -->
+      <div class="tool-section fade-in delay-2">
+        <div class="tool-header">
+          <img src="https://www.flippity.net/images/Flippity.png" alt="Flippity Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Flippity – Интерактивті ойындар</h2>
+            <p class="tool-subtitle">Google Sheets арқылы жасалатын оқу құралдары</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Flippity – Google Sheets арқылы жасалатын интерактивті білім беру құралдары (карточкалар, викториналар, ойындар).</p>
+          <p><strong>Қолдану жолы:</strong> Flippity.net сайтынан шаблон таңдау, Google Sheets арқылы мазмұн енгізу, автоматты түрде интерактив құралға айналады.</p>
+          <p><strong>Артықшылықтары:</strong> Тегін, түрлі тапсырмалар түрі бар (сөздік жаттау, сәйкестік, тест т.б.), уақыт үнемдейді.</p>
+          <p><strong>Оқытуда қолдану:</strong> Сөздік жаттау, тест жасау, сөйлем құрау, кроссворд.</p>
+        </div>
+      </div>
+
+      <!-- Wikipedia -->
+      <div class="tool-section fade-in delay-3">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia-logo.png" alt="Wikipedia Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Wikipedia – Ашық энциклопедия</h2>
+            <p class="tool-subtitle">Әлемдік ақпарат көзі</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Wikipedia – әлемдік ашық энциклопедия, қолданушылар мақала жазып, өңдей алады.</p>
+          <p><strong>Қолдану жолы:</strong> Белгілі бір тақырыпты іздеу, ақпаратты талдау, мәтінмен жұмыс жасау.</p>
+          <p><strong>Артықшылықтары:</strong> Ақпараттың молдығы, тіл үйренушілерге академиялық дағдыларды дамытуға көмектеседі.</p>
+          <p><strong>Оқытуда қолдану:</strong> Мәтінмен жұмыс, оқушыларға тақырып беріп, мақала мазмұнын түсіндіру, сөздікпен жұмыс.</p>
+        </div>
+      </div>
+
+      <!-- Twitter -->
+      <div class="tool-section fade-in delay-4">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Twitter – Қысқа жазбалар</h2>
+            <p class="tool-subtitle">Микроблоггинг платформасы</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Twitter – қысқа жазбалармен (посттармен) бөлісуге арналған әлеуметтік желі.</p>
+          <p><strong>Қолдану жолы:</strong> Хэштег арқылы тақырыптық талқылау, оқушылар 280 таңбадан аспайтын ой жазу.</p>
+          <p><strong>Артықшылықтары:</strong> Қысқа әрі нақты жазуға үйретеді, сөздік қорды байытады, тілдік ортаға жақындатады.</p>
+          <p><strong>Оқытуда қолдану:</strong> Тақырып бойынша шағын твит жазу, грамматикалық құрылымдарды қолдану.</p>
+        </div>
+      </div>
+
+      <!-- Diigo -->
+      <div class="tool-section fade-in delay-5">
+        <div class="tool-header">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Diigo_logo.svg" alt="Diigo Logo" class="tool-logo">
+          <div>
+            <h2 class="tool-title">Diigo – Дереккөздерді басқару</h2>
+            <p class="tool-subtitle">Сілтемелер мен аннотациялар құралы</p>
+          </div>
+        </div>
+        
+        <hr class="divider">
+        
+        <div class="tool-content">
+          <p><strong>Сипаттамасы:</strong> Diigo – сілтемелерді, мақалаларды сақтау және оларға жазба қалдыруға болатын платформа.</p>
+          <p><strong>Қолдану жолы:</strong> Мұғалім не студент пайдалы сілтемелерді Diigo-ға сақтайды, оған түсініктеме жазып, бөлісе алады.</p>
+          <p><strong>Артықшылықтары:</strong> Ақпаратты сақтау мен құрылымдауға көмектеседі, зерттеу жасауға пайдалы, топтық жұмысқа ыңғайлы.</p>
+          <p><strong>Оқытуда қолдану:</strong> Онлайн дереккөздерден алынған ақпаратты талдау, ортақ жобаларда материал жинау.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fade-in delay-3">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="index.html">Басты бет</a>
+        <a href="tools.html">Құралдар</a>
+        <a href="examples.html">Мысалдар</a>
+        <a href="#contact">Байланыс</a>
+      </div>
+      <div class="social-links">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p class="copyright">Web 2.0 Құралдары. Барлық құқықтар қорғалған. © 2023</p>
+    </div>
+  </footer>
+</body>
+</html>
